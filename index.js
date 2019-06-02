@@ -1,6 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
-const port = process.env.PORT;
+const express = require('express');
+const app = express();
+
+const port = process.env.PORT || 3000;
 const token = process.env.BOT_API_KEY;
+
 const bot = new TelegramBot(token, {
   polling: true
 });
@@ -28,4 +32,8 @@ bot.onText(/\paehali/, msg => {
       bot.sendPhoto(chatId, result.file_id);
     });
   });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
